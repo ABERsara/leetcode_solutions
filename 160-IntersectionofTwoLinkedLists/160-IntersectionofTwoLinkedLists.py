@@ -1,4 +1,4 @@
-# Last updated: 5/8/2025, 1:11:48 PM
+# Last updated: 5/8/2025, 1:13:30 PM
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, x):
@@ -8,14 +8,16 @@
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         """
-        :type headA, headB: ListNode
+        :type head1, head1: ListNode
         :rtype: ListNode
         """
-        a = headA
-        b = headB
-
-        while a is not b:
-            a = a.next if a else headB
-            b = b.next if b else headA
-        
-        return a
+        if not headA or not headB:
+            return None
+    
+        pointerA, pointerB = headA, headB
+    
+        while pointerA != pointerB:
+            pointerA = pointerA.next if pointerA else headB
+            pointerB = pointerB.next if pointerB else headA
+        return pointerA
+    

@@ -1,22 +1,14 @@
-# Last updated: 5/11/2025, 5:03:05 PM
-__import__("atexit").register(lambda: open("display_runtime.txt", "w").write("0"))
+# Last updated: 5/11/2025, 5:04:08 PM
 class Solution(object):
     def findDuplicate(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        slow = nums[0]
-        fast = nums[0]
-        while True:
-            slow = nums[slow]
-            fast = nums[nums[fast]]
-            if slow == fast:
-                break
+        seen = [0] * len(nums)
 
-        slow = nums[0]
-        while slow != fast:
-            slow = nums[slow]
-            fast = nums[fast]
-
-        return slow
+        for num in nums:
+            if seen[num - 1]:
+                return num
+            seen[num - 1] = 1
+        return -1

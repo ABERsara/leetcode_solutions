@@ -1,16 +1,22 @@
-# Last updated: 5/11/2025, 4:15:51 PM
+# Last updated: 5/11/2025, 5:02:45 PM
 class Solution(object):
-    def plusOne(self, digits):
+    def findDuplicate(self, nums):
         """
-        :type digits: List[int]
-        :rtype: List[int]
+        :type nums: List[int]
+        :rtype: int
         """
-        for i in range(len(digits) - 1, -1, -1):
-            if digits[i] < 9:
-                digits[i] += 1
-                return digits
-            digits[i] = 0
-        return [1] + digits
+        slow = nums[0]
+        fast = nums[0]
 
-
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
         
+        slow = nums[0]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+    
+        return fast

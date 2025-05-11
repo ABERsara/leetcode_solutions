@@ -1,4 +1,4 @@
-# Last updated: 5/11/2025, 5:21:39 PM
+# Last updated: 5/11/2025, 5:22:36 PM
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
@@ -11,16 +11,21 @@ class Solution(object):
         :type root: Optional[TreeNode]
         :rtype: bool
         """
+        self.prev = None
 
-        def valid_BST(node, low=float('-inf'), high=float('inf')):
+        def inorder(node):
             if not node:
                 return True
-            
-            if not (low < node.val < high):
+
+            if not inorder(node.left):
                 return False
-            
-            return (valid_BST(node.left, low, node.val) and
-                    valid_BST(node.right, node.val, high))
-        
-        return valid_BST(root)
+
+            if self.prev is not None and node.val <= self.prev:
+                return False
+
+            self.prev = node.val
+
+            return inorder(node.right)
+
+        return inorder(root)
         
